@@ -10,6 +10,7 @@ import pygame as py
 
 import ai_engine
 from enums import Player
+import logging
 
 """Variables"""
 WIDTH = HEIGHT = 512  # width and height of the chess board
@@ -124,6 +125,7 @@ def main():
     if human_player is 'b':
         ai_move = ai.minimax_black(game_state, 3, -100000, 100000, True, Player.PLAYER_1)
         game_state.move_piece(ai_move[0], ai_move[1], True)
+        logging.info("The white piece started by AI")
 
     while running:
         for e in py.event.get():
@@ -147,6 +149,7 @@ def main():
                             player_clicks = []
                             valid_moves = []
                         else:
+                            logging.info("The white piece started by AI")
                             game_state.move_piece((player_clicks[0][0], player_clicks[0][1]),
                                                   (player_clicks[1][0], player_clicks[1][1]), False)
                             square_selected = ()
@@ -187,7 +190,7 @@ def main():
         elif endgame == 2:
             game_over = True
             draw_text(screen, "Stalemate.")
-
+            logging.info("The game ended in a Stalemate ")
         clock.tick(MAX_FPS)
         py.display.flip()
 

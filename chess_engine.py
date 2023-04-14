@@ -203,14 +203,14 @@ class game_state:
                 else:
                     for move in initial_valid_piece_moves:
                         valid_moves.append(move)
-            # if not valid_moves:
-            #     if self._is_check:
-            #         self.checkmate = True
-            #     else:
-            #         self.stalemate = True
-            # else:
-            #     self.checkmate = False
-            #     self.stalemate = False
+            if not valid_moves:
+                if self._is_check:
+                    self.checkmate = True
+                else:
+                    self.stalemate = True
+            else:
+                self.checkmate = False
+                self.stalemate = False
             return valid_moves
         else:
             return None
@@ -226,6 +226,7 @@ class game_state:
             print("black lost")
             return 1
         elif not all_white_moves and not all_black_moves:
+            print("stalemate")
             return 2
         else:
             return 3
@@ -569,7 +570,7 @@ class game_state:
     '''
 
     def check_for_check(self, king_location, player):
-        # self._is_check = False
+      #  self._is_check = False
         _checks = []
         _pins = []
         _pins_check = []
@@ -854,7 +855,7 @@ class game_state:
                     # self._is_check = True
                     _checks.append((king_location_row + row_change[i], king_location_col + col_change[i]))
         # print([_checks, _pins, _pins_check])
-        return [_pins_check, _pins, _pins_check]
+        return [_checks, _pins, _pins_check]
 
 
 class chess_move():
