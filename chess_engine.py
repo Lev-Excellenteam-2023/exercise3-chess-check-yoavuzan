@@ -220,13 +220,10 @@ class game_state:
         all_white_moves = self.get_all_legal_moves(Player.PLAYER_1)
         all_black_moves = self.get_all_legal_moves(Player.PLAYER_2)
         if self._is_check and self.whose_turn() and not all_white_moves:
-            print("white lost")
             return 0
         elif self._is_check and not self.whose_turn() and not all_black_moves:
-            print("black lost")
             return 1
         elif not all_white_moves and not all_black_moves:
-            print("stalemate")
             return 2
         else:
             return 3
@@ -856,6 +853,7 @@ class game_state:
                     _checks.append((king_location_row + row_change[i], king_location_col + col_change[i]))
         # print([_checks, _pins, _pins_check])
         return [_checks, _pins, _pins_check]
+
 
 
 class chess_move():
